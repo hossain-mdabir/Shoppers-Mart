@@ -11,7 +11,10 @@ import SwiftUI
 struct Shoppers_MartApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                MainView()
+            }
+            .navigationViewStyle(.stack)
         }
     }
 }
