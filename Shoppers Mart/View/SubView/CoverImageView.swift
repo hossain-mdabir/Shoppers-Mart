@@ -10,20 +10,21 @@ import SwiftUI
 struct CoverImageView: View {
     // MARK: - PROPERTIES
     
-    let images: [String] = ["person", "person", "person", "person", "person", "person"]
+    let images: [String] = ["offer1", "offer2", "offer3"]
     
     // MARK: - BODY
     
     var body: some View {
         TabView {
             ForEach(0 ..< images.count, id: \.self) { item in
-                Image(systemName: images[item])
+                Image(images[item])
                     .resizable()
+                    .scaledToFit()
                     .frame(width: 350, height: 350)
-                    .scaledToFill()
             } //: FOREACH LOOP
         } //: TAB
-        .tabViewStyle(PageTabViewStyle())
+        .tabViewStyle(.page(indexDisplayMode: .always))
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
 }
 

@@ -117,6 +117,7 @@ struct MainView: View {
                     .frame(maxWidth: .infinity)
                     .background(Color("Background"))
                     .roundedCorner(25, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight])
+                    .cornerRadius(40)
                     .padding(.horizontal)
                 , alignment: .bottom
             )
