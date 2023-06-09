@@ -32,21 +32,27 @@ struct ProductView: View {
                     .lineLimit(1)
                 
                 HStack {
+                    Image(systemName: "star.fill")
+                        .font(.title3)
+                        .foregroundColor(Color.yellow)
+                    
                     Text("\(product.rating?.rate ?? 0.0, specifier: "%.2f")")
+                    
                     Spacer()
+                    
                     Text("Price: \(product.price ?? 0.0, specifier: "%.2f")")
                         .foregroundColor(Color.blue.opacity(0.7))
-                }
-            }
+                } //: HSTACK
+            } // VSTACK
             .foregroundColor(Color.black.opacity(0.5))
-        }
+        } //: HSTACK
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(Color.gray.opacity(0.2))
+        .background(Color.red.opacity(0.1))
         .cornerRadius(5)
         .shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
         .shadow(color: Color.white, radius: 5, x: -1, y: -3)
-        .padding(5)
+        .padding(10)
     }
 }
 

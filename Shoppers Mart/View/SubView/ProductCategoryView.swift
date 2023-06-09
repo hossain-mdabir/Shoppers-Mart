@@ -28,14 +28,13 @@ struct ProductCategoryView: View {
                                 .resizable()
                                 .frame(width: 50, height: 50)
                             Text(prodCat[item])
+                                .foregroundColor(Color.gray)
                                 .frame(width: 100, height: 50)
                                 .multilineTextAlignment(.center)
                         } //: VSTACK
                         .padding()
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(.gray, lineWidth: 4)
-                        )
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(10)
                     }
                 } //: LOOP
             } //: LazyHGrid

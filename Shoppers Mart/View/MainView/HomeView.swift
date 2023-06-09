@@ -17,7 +17,7 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 CoverImageView()
                     .frame(height: 300)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -26,7 +26,9 @@ struct HomeView: View {
                 
                 VStack(spacing: 0) {
                     ForEach(0 ..< prodList.count, id: \.self) { index in
-                        ProductView(product: prodList[index])
+                        NavigationLink(destination: ProductDetailsView(product: prodList[index])) {
+                            ProductView(product: prodList[index])
+                        }
                     } //: LOOP
                 } // VSTACK
             } //: SCROLL
