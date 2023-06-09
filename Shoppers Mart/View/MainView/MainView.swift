@@ -17,7 +17,7 @@ struct MainView: View {
     
     // View Selection
     @State private var selectedView: SelectedView? = .home
-    
+    @StateObject var profileImage = ImageViewModel()
     
     // MARK: - BODY
     
@@ -123,6 +123,7 @@ struct MainView: View {
             )
         }
         .navigationViewStyle(.stack)
+        .environmentObject(profileImage)
     }
 }
 

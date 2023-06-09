@@ -12,6 +12,9 @@ struct ProductDetailsView: View {
     
     var product: ProductList
     
+//    @AppStorage("prodList") var prodList: [ProductList] = []
+    
+    
     // MARK: - BODY
     
     var body: some View {

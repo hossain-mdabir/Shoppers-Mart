@@ -12,6 +12,7 @@ struct HomeView: View {
     
     @State private var prodList: [ProductList] = []
     
+    @EnvironmentObject var profileImage: ImageViewModel
     
     // MARK: - BODY
     
@@ -42,6 +43,22 @@ struct HomeView: View {
                 }
             }
         })
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+//                Image(uiImage: (profileImage.image ?? UIImage(systemName: "profile_a"))!)
+                if let image = profileImage.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(80)
+                } else {
+                    Image(systemName: "person.fill")
+                        .font(.system(size: 18))
+                        .padding()
+                        .foregroundColor(Color(.label))
+                }
+            }
+        }
     }
 }
 
