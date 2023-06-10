@@ -9,7 +9,7 @@ import Foundation
 import SQLite3
 
 
-class ProductDB {
+class ProductDB: ObservableObject {
     
     let dbName: String = "ProductDB.sqlite"
     var db : OpaquePointer?
@@ -27,7 +27,7 @@ class ProductDB {
     static let COL_IMAGE = "ColImage"
     static let COL_RATE = "ColRate"
     static let COL_ORDER_QTY = "ColOrderQty"
-    static let COL_TOTAL_PRICE = "ColOrderQty"
+    static let COL_TOTAL_PRICE = "ColTotalPrice"
     
     
     init() {
@@ -108,7 +108,7 @@ class ProductDB {
             \(ProductDB.COL_ORDER_QTY),
             \(ProductDB.COL_TOTAL_PRICE)
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """
         
         var statement: OpaquePointer? = nil
@@ -202,7 +202,7 @@ class ProductDB {
     
     // MARK: - Update added products for selected customer
     func updateProd(prodTitle: String, prodQty: Int, totalPrice: Double) {
-        var query = "UPDATE OrderCHD SET \(ProductDB.COL_ORDER_QTY) = \(prodQty), \(ProductDB.COL_TOTAL_PRICE) = \(totalPrice) WHERE \(ProductDB.COL_TITLE) = '\(prodTitle)'"
+        let query = "UPDATE TableProduct SET \(ProductDB.COL_ORDER_QTY) = '\(prodQty)', \(ProductDB.COL_TOTAL_PRICE) = '\(totalPrice)' WHERE \(ProductDB.COL_TITLE) = '\(prodTitle)'"
         
         var statement : OpaquePointer? = nil
         if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK{

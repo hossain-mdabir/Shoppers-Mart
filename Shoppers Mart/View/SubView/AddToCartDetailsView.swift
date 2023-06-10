@@ -19,7 +19,7 @@ struct AddToCartDetailView: View {
         Button(action: {
             product.orderQty = counter
             product.totalPrice = ((product.price ?? 0.0) * Double(counter))
-            
+            print("product.totalPrice : \(product.totalPrice)")
             ProductDB().insertProd(prod: product)
         }, label: {
             Spacer()
