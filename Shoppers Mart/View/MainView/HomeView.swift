@@ -27,7 +27,7 @@ struct HomeView: View {
                 
                 VStack(spacing: 0) {
                     ForEach(0 ..< prodList.count, id: \.self) { index in
-                        NavigationLink(destination: ProductDetailsView(product: prodList[index])) {
+                        NavigationLink(destination: ProductDetailsView(product: $prodList[index])) {
                             ProductView(product: prodList[index])
                         }
                     } //: LOOP

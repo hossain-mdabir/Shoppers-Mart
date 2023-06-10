@@ -1,5 +1,5 @@
 //
-//  ShopDB.swift
+//  ProductDB.swift
 //  Shoppers Mart
 //
 //  Created by Md Abir Hossain on 10-06-2023.
@@ -10,7 +10,6 @@ import SQLite3
 
 
 class ProductDB {
-    
     
     let dbName: String = "ProductDB.sqlite"
     var db : OpaquePointer?
@@ -28,6 +27,7 @@ class ProductDB {
     static let COL_IMAGE = "ColImage"
     static let COL_RATE = "ColRate"
     static let COL_ORDER_QTY = "ColOrderQty"
+    static let COL_TOTAL_PRICE = "ColOrderQty"
     
     
     init() {
@@ -74,7 +74,8 @@ class ProductDB {
             \(ProductDB.COL_CATEGORY) TEXT,
             \(ProductDB.COL_IMAGE) TEXT,
             \(ProductDB.COL_RATE) REAL,
-            \(ProductDB.COL_ORDER_QTY) INTEGER
+            \(ProductDB.COL_ORDER_QTY) INTEGER,
+            \(ProductDB.COL_TOTAL_PRICE) REAL
             )
             """
         
@@ -95,7 +96,6 @@ class ProductDB {
     
     // MARK: - Insert car info in the table
     func insertProd(prod: ProductList) {
-        
         let query = """
             INSERT INTO  \(ProductDB.TABLE_PRODUCT) (
             \(ProductDB.COL_ID),
@@ -105,7 +105,8 @@ class ProductDB {
             \(ProductDB.COL_CATEGORY),
             \(ProductDB.COL_IMAGE),
             \(ProductDB.COL_RATE),
-            \(ProductDB.COL_ORDER_QTY)
+            \(ProductDB.COL_ORDER_QTY),
+            \(ProductDB.COL_TOTAL_PRICE)
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """
@@ -121,6 +122,8 @@ class ProductDB {
             sqlite3_bind_text(statement, 5, ((prod.category ?? "") as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 6, ((prod.image ?? "") as NSString).utf8String, -1, nil)
             sqlite3_bind_double(statement, 7, prod.rating?.rate ?? 0)
+            sqlite3_bind_int(statement, 8, Int32(prod.orderQty ?? 0))
+            sqlite3_bind_double(statement, 9, prod.totalPrice ?? 0)
             
             if sqlite3_step(statement) == SQLITE_DONE {
                 print("Product Data inserted successfully")
@@ -145,14 +148,15 @@ class ProductDB {
             
             while sqlite3_step(statement) == SQLITE_ROW {
                 
-                let id = Int(sqlite3_column_double(statement, 10))
-                let title = String(describing: String(cString: sqlite3_column_text(statement, 1)))
-                let price = sqlite3_column_double(statement, 9)
-                let description = String(describing: String(cString: sqlite3_column_text(statement, 3)))
-                let category = String(describing: String(cString: sqlite3_column_text(statement, 3)))
-                let image = String(describing: String(cString: sqlite3_column_text(statement, 3)))
-                let rate = sqlite3_column_double(statement, 9)
-                let orderQty = Int(sqlite3_column_double(statement, 10))
+                let id = Int(sqlite3_column_double(statement, 1))
+                let title = String(describing: String(cString: sqlite3_column_text(statement, 2)))
+                let price = sqlite3_column_double(statement, 3)
+                let description = String(describing: String(cString: sqlite3_column_text(statement, 4)))
+                let category = String(describing: String(cString: sqlite3_column_text(statement, 5)))
+                let image = String(describing: String(cString: sqlite3_column_text(statement, 6)))
+                let rate = sqlite3_column_double(statement, 7)
+                let orderQty = Int(sqlite3_column_double(statement, 8))
+                let totalPrice = sqlite3_column_double(statement, 9)
                 
                 var prod = ProductList()
                 prod.id = id
@@ -163,12 +167,12 @@ class ProductDB {
                 prod.image = image
                 prod.rating?.rate = rate
                 prod.orderQty = orderQty
+                prod.totalPrice = totalPrice
                 
                 prodList.append(prod)
                 
-                print("size---:CC \(prod.title) , ")
+                print("size---:CC \(prod.title)")
             }
-            
         } else {
             
             let errorMessage = String(cString: sqlite3_errmsg(db))
@@ -176,11 +180,37 @@ class ProductDB {
         }
         
         sqlite3_finalize(statement)
-        
         print("ProductDB size : \(prodList.count)")
         
         return prodList
     }
     
     
+    // MARK: - Delete added products for selected customer
+    func deleteProd(prodTitle: String) {
+        let query = "DELETE FROM \(ProductDB.TABLE_PRODUCT) WHERE \(ProductDB.COL_TITLE) = '\(prodTitle)'"
+        
+        var statement : OpaquePointer? = nil
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK{
+            if sqlite3_step(statement) == SQLITE_DONE {
+                print("ProductDB Data delete success")
+            } else {
+                print("ProductDB Data is not deleted from table")
+            }
+        }
+    }
+    
+    // MARK: - Update added products for selected customer
+    func updateProd(prodTitle: String, prodQty: Int, totalPrice: Double) {
+        var query = "UPDATE OrderCHD SET \(ProductDB.COL_ORDER_QTY) = \(prodQty), \(ProductDB.COL_TOTAL_PRICE) = \(totalPrice) WHERE \(ProductDB.COL_TITLE) = '\(prodTitle)'"
+        
+        var statement : OpaquePointer? = nil
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK{
+            if sqlite3_step(statement) == SQLITE_DONE {
+                print("ProductDB Data update success")
+            } else {
+                print("ProductDB Data is not updated from table")
+            }
+        }
+    }
 }

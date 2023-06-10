@@ -20,6 +20,7 @@ struct ProductList: Decodable {
     var image: String?
     var rating: Rating?
     var orderQty: Int?
+    var totalPrice: Double?
 }
 
 // MARK: - Rating

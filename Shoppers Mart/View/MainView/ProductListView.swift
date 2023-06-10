@@ -27,7 +27,7 @@ struct ProductListView: View {
                     LazyVStack {
                         ForEach(0 ..< prodList.count, id: \.self) { index in
                             //                        ProductView(product: prodList[index])
-                            NavigationLink(destination: ProductDetailsView(product: prodList[index])) {
+                            NavigationLink(destination: ProductDetailsView(product: $prodList[index])) {
                                 VStack {
                                     AsyncImage(url: URL(string: "\(prodList[index].image ?? "")")) { image in
                                         image.resizable()

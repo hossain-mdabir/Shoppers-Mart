@@ -10,14 +10,14 @@ import SwiftUI
 struct QuantityFavouriteDetailView: View {
     // MARK: - PROPERTY
     
-    @State private var counter: Int = 0
+    @Binding var counter: Int
     
     // MARK: - BODY
     
     var body: some View {
         HStack(alignment: .center, spacing: 6, content: {
             Button(action: {
-                if counter > 0 {
+                if counter > 1 {
                     counter -= 1
                 }
             }, label: {
@@ -53,7 +53,8 @@ struct QuantityFavouriteDetailView: View {
 // MARK: - PREVIEW
 
 struct QuantityFavouriteDetailView_Previews: PreviewProvider {
+    @State static var counter: Int = 1
     static var previews: some View {
-        QuantityFavouriteDetailView()
+        QuantityFavouriteDetailView(counter: $counter)
     }
 }

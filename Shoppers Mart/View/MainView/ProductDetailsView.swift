@@ -10,9 +10,9 @@ import SwiftUI
 struct ProductDetailsView: View {
     // MARK: - PROPERTIES
     
-    var product: ProductList
+    @Binding var product: ProductList
     
-//    @AppStorage("prodList") var prodList: [ProductList] = []
+    @State private var counter: Int = 1
     
     
     // MARK: - BODY
@@ -44,7 +44,7 @@ struct ProductDetailsView: View {
                     } //: HSTACK
                     .foregroundColor(Color.gray)
                     
-                    Text("৳ \(Text("\(product.price ?? 0.0, specifier: "%.2f")").font(.title3).foregroundColor(Color.red))")
+                    Text("৳ \(Text("\(((product.price ?? 0.0) * Double(counter)), specifier: "%.2f")").font(.title3).foregroundColor(Color.red))")
                     
                     ScrollView(showsIndicators: false) {
                             Text("\(product.description ?? "")")
@@ -52,11 +52,11 @@ struct ProductDetailsView: View {
                     } //: SCROLL
                     
                     // QUANTITY + FAVOURITE
-                    QuantityFavouriteDetailView()
+                    QuantityFavouriteDetailView(counter: $counter)
                         .padding(.vertical, 10)
                     
                     // ADD TO CART
-                    AddToCartDetailView()
+                    AddToCartDetailView(product: $product, counter: $counter)
                         .padding(.bottom, 20)
                 } //: VSTACK
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -67,7 +67,8 @@ struct ProductDetailsView: View {
 }
 
 struct ProductDetailsView_Previews: PreviewProvider {
+    @State static var product  = ProductList()
     static var previews: some View {
-        ProductDetailsView(product: ProductList())
+        ProductDetailsView(product: $product)
     }
 }

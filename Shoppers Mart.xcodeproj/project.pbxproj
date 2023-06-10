@@ -20,7 +20,7 @@
 		10312CC12A33675300952B71 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10312CC02A33675300952B71 /* Image.swift */; };
 		10312CC32A336A0200952B71 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10312CC22A336A0200952B71 /* ImagePicker.swift */; };
 		10312CC62A33717D00952B71 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10312CC52A33717D00952B71 /* PopUp.swift */; };
-		10312CC92A33D29C00952B71 /* ShopDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10312CC82A33D29C00952B71 /* ShopDB.swift */; };
+		10312CC92A33D29C00952B71 /* ProductDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10312CC82A33D29C00952B71 /* ProductDB.swift */; };
 		10F514AB2A2F976A0051D945 /* Shoppers_MartApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F514AA2A2F976A0051D945 /* Shoppers_MartApp.swift */; };
 		10F514AD2A2F976A0051D945 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F514AC2A2F976A0051D945 /* ContentView.swift */; };
 		10F514AF2A2F976B0051D945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10F514AE2A2F976B0051D945 /* Assets.xcassets */; };
@@ -47,7 +47,7 @@
 		10312CC02A33675300952B71 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		10312CC22A336A0200952B71 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		10312CC52A33717D00952B71 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
-		10312CC82A33D29C00952B71 /* ShopDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDB.swift; sourceTree = "<group>"; };
+		10312CC82A33D29C00952B71 /* ProductDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDB.swift; sourceTree = "<group>"; };
 		10F514A72A2F976A0051D945 /* Shoppers Mart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shoppers Mart.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10F514AA2A2F976A0051D945 /* Shoppers_MartApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoppers_MartApp.swift; sourceTree = "<group>"; };
 		10F514AC2A2F976A0051D945 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		10312CC72A33D27400952B71 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				10312CC82A33D29C00952B71 /* ShopDB.swift */,
+				10312CC82A33D29C00952B71 /* ProductDB.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -282,7 +282,7 @@
 				10312CC62A33717D00952B71 /* PopUp.swift in Sources */,
 				1019F45B2A3217E7009F5E15 /* Api.swift in Sources */,
 				10312CBE2A334BF000952B71 /* Shapes.swift in Sources */,
-				10312CC92A33D29C00952B71 /* ShopDB.swift in Sources */,
+				10312CC92A33D29C00952B71 /* ProductDB.swift in Sources */,
 				10F514C22A2F9B9D0051D945 /* CoverImageView.swift in Sources */,
 				10312CC12A33675300952B71 /* Image.swift in Sources */,
 				10F514C62A30226B0051D945 /* ProductView.swift in Sources */,
